@@ -1,0 +1,61 @@
+.general-heading {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: darkgreen;
+}
+
+.unit-gallery {
+    text-align: center;
+    border: solid darkgreen 1px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background-color: rgb(239, 226, 210);
+
+}
+
+.picture-with-title {
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.picture {
+    width: 500px;
+    height: 300px;
+
+}
+
+.title-picture {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 500px;
+
+}
+
+.portrait-with-title {
+    display: inline-block;
+}
+
+.portrait {
+    width: 200px;
+    height: 220px;
+}
+
+.title-portrait {
+    display: block;
+    width: 200px;
+}
+
+.copyrigth {
+    background-color: gray;
+    color: white;
+    display: inline;
+}
+
+lable {
+    color: green;
+    font-size: 0.8em;
+}
