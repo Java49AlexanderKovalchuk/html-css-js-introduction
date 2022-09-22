@@ -1,7 +1,25 @@
+@font-face {
+    font-family: lakeshore;
+    src: url("fonts/LAKESHOR-webfont.svg");
+    src: url("fonts/LAKESHOR-webfont.woff");
+}
+
+:root {
+    --thumbnails-image-width: 25vw;
+    --thumbnails-image-height: 15vw;
+    --thumbnails-image-title: calc(var(--thumbnails-image-height) * 0.33);
+}
+
 body {
     display: flex;
     flex-direction: column;
     background-color: rgb(172, 211, 243);
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 .logo {
@@ -9,13 +27,23 @@ body {
     font-size: 2em;
     background-color: blue;
     color: white;
+    font-family: lakeshore;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.main-class {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .details-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3.5vh;
+    margin-bottom: 10vh;
 }
 
 .detail-image {
@@ -37,35 +65,93 @@ body {
     overflow-y: auto;
     padding-left: 0;
     justify-content: space-evenly;
-
 }
 
 .thumbnails-item {
-    width: 24vw;
-    height: 20vw;
+    max-width: var(--thumbnails-image-width);
+    min-height: calc(var(--thumbnails-image-height) + var(--thumbnails-image-title));
     margin-top: 2.5vh;
     border: solid white 1px;
     border-radius: 25%;
-    overflow: hidden;
-    /* to prevent the picture and the title out from the border */
+    overflow: hidden;       /* to prevent the picture and the title out from the border */
 }
 
-
 .thumbnails-image {
-    width: 24vw;
-    height: 15vw;
-    display: block;
-    /* to rid the gap between image and it's title and to show the border below picture*/
+    width: var(--thumbnails-image-width);
+    height: var(--thumbnails-image-height);
+    display: block;         /* to rid the gap between image and it's title and to show the border below picture*/
 }
 
 .thumbnails-title {
     display: block;
     text-align: center;
-    height: 5vw;
+    height: var(--thumbnails-image-title);
     background-color: rgb(27, 98, 206);
     color: azure;
 }
 
 .thumbnails-anchor {
     text-decoration: none;
+}
+
+@media (min-width: 560px) {
+    :root {
+        --thumbnails-image-width: 12vw;     /* for reducing the size of thumbnails */
+        --thumbnails-image-height: 7vw;
+    }
+
+    body {
+        overflow: hidden;                   /* to prevent scrolling effect all content  */
+    }
+
+    .main-class {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .details-container {
+        margin-top: 25px;
+    }
+
+    .detail-image {
+        width: 60vw;
+        height: 35vw;
+    }
+
+    .detail-title {
+        color: rgb(92, 24, 24);
+    }
+
+    .thumbnails-list {
+        flex-direction: column;
+        order: -1;
+        flex-wrap: nowrap;
+        justify-content: start;
+        max-height: 80vh;
+    }
+
+    .thumbnails-title {
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .details-container {
+        justify-content: center;
+        padding-bottom: 10vh;
+    }
+
+    .thumbnails-list {
+        width: 16vw;        /* to get the space between thumbnails and the scrollbar */
+    }
+
+    .thumbnails-item {
+        border: solid white 2px;
+    }
+
+    .thumbnails-title {
+        font-size: 1em;
+    }
 }
