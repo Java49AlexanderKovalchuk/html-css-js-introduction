@@ -4,6 +4,12 @@
     src: url("fonts/LAKESHOR-webfont.woff");
 }
 
+@font-face {
+    font-family: airstream;
+    src: url("fonts/Airstream-webfont.svg");
+    src: url("fonts/Airstream-webfont.woff");
+}
+
 :root {
     --thumbnails-image-width: 25vw;
     --thumbnails-image-height: 15vw;
@@ -36,7 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
+     flex-grow: 1;
 }
 
 .details-container {
@@ -44,6 +50,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin-bottom: 10vh;
+   
 }
 
 .detail-image {
@@ -54,6 +61,8 @@ body {
 
 .detail-title {
     display: block;
+    font-family: airstream;
+    font-size: 1.2em;
 }
 
 .thumbnails-list {
@@ -100,10 +109,7 @@ body {
         --thumbnails-image-height: 7vw;
     }
 
-    body {
-        overflow: hidden;                   /* to prevent scrolling effect all content  */
-    }
-
+    
     .main-class {
         display: flex;
         flex-direction: row;
@@ -112,6 +118,7 @@ body {
 
     .details-container {
         margin-top: 25px;
+        height: 70vh;                   /* to avoid vertical scrolling */ 
     }
 
     .detail-image {
