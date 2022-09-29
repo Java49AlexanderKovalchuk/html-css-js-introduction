@@ -1,0 +1,60 @@
+:root {
+    --cell-width: 8vw;
+    --cell-height: 8vw;
+}
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;             /* to avoid the scrolling */
+}
+
+.board {
+    display: flex;
+    flex-direction: column; 
+} 
+
+.board-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.cell-black {
+    display: inline-block;
+    width: var(--cell-width);
+    height: var(--cell-height);
+    background-color: black;
+    border: solid black 1px;
+
+}
+
+.cell-white {
+    display: inline-block;
+    width: var(--cell-width);
+    height: var(--cell-height);
+    background-color: white;
+    border: solid black 1px;
+}
+
+@media (min-width: 560px) {
+    :root {
+        --cell-width: 4vw;
+        --cell-height: 4vw;
+    }
+
+}
+
+@media (min-width: 900px) {
+    :root {
+        --cell-width: 6vw;
+        --cell-height: 6vw;
+    }
+    
+}
+
+
+
