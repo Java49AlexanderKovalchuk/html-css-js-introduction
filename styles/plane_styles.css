@@ -144,8 +144,7 @@ body {
 
     .detail-title {
         color: rgb(92, 24, 24);
-        /* bottom: 2vw;
-        left: 1vw; */
+        font-size: 1.5em;
     }
 
     .thumbnails-list {
