@@ -45,6 +45,12 @@ body {
     flex-grow: 1;
 }
 
+.main-class.hidden {
+    --thumbnails-image-width: 35vw;
+    --thumbnails-image-height: 25vw;
+    --thumbnails-image-title: calc(var(--thumbnails-image-height) * 0.33);
+}
+
 .details-container {
     display: flex;
     flex-direction: column;
@@ -53,10 +59,19 @@ body {
     
 }
 
+.hidden .details-container {
+    display: none;
+}
+
 .details-frame {
     position: relative;
 }
 
+.hide-button {
+    position: absolute;
+    top: 2vh;
+    right: 3vw;
+}
 
 .detail-image {
     width: 70vw;
@@ -72,7 +87,7 @@ body {
     background-color: azure;
     position: absolute;
     bottom: 3vw;
-    left: 2vw;
+    left: 1vw;
     
 }
 
@@ -85,6 +100,11 @@ body {
     overflow-y: auto;
     padding-left: 0;
     justify-content: space-evenly;
+}
+
+.hidden .thumbnails-list {
+    max-height: 80vh;
+    margin-bottom: 7vh;  
 }
 
 .thumbnails-item {
@@ -110,6 +130,10 @@ body {
     color: azure;
 }
 
+.hidden .thumbnails-title {
+    font-size: 1.3em;     /* to make bigger the font size of the thumbnails in layout without detail picture  */
+}
+
 .thumbnails-anchor {
     text-decoration: none;
 }
@@ -125,11 +149,16 @@ body {
         --thumbnails-image-height: 7vw;
     }
 
-    
     .main-class {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+    }
+
+    .main-class.hidden {
+        --thumbnails-image-width: 22vw;
+        --thumbnails-image-height: 12vw;
+        --thumbnails-image-title: calc(var(--thumbnails-image-height) * 0.33);
     }
 
     .details-container {
@@ -155,6 +184,12 @@ body {
         max-height: 80vh;
     }
 
+    .hidden .thumbnails-list {
+        flex-direction: row;    /* to make correct order of the thumbnails in the layout without detail */
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
     .thumbnails-title {
         font-size: 0.8em;
     }
@@ -167,13 +202,20 @@ body {
         padding-bottom: 10vh;
     }
     
-    /* .detail-title {
-        bottom: 13vw;
-    } */
-
     .thumbnails-list {
         width: 17.5vw;       /* to get the space between thumbnails and the scrollbar */
-        /* padding-right: 2vw; */
+    }
+
+    .main-class.hidden { /* for overridden the sizes and configuration of thumbnails in the layout without detail */
+        --thumbnails-image-width: 20vw;
+        --thumbnails-image-height: 12vw;
+        --thumbnails-image-title: calc(var(--thumbnails-image-height) * 0.33);
+    }
+
+    .hidden .thumbnails-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 80vw;
     }
 
     .thumbnails-item {
