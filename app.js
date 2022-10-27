@@ -1,13 +1,12 @@
 
 function sumDigits(number) {
-    if(number < 0) {
+    if (number < 0) {
         number = -number;
     }
     let sum = 0;
-    for (let i = number; i > 0; i = Math.trunc(i / 10)) {
-        console.log("i = ", i);  // see "i" in each iteration
-        number = i % 10;         // get the last digit of the number in the iteration
-        sum = sum + number;      
+    while (number > 0) {
+        sum += number % 10;
+        number = Math.trunc(number / 10);
     }
     return sum;
 }
