@@ -12,15 +12,15 @@ function setDetails(anchor) {
     detailsImage.setAttribute("src", anchor.getAttribute("data-details-image"));
     detailsTitle.innerHTML = anchor.getAttribute("data-details-title");
     audio.setAttribute("src", anchor.getAttribute("data-details-audio"));
-    showDetails();
 }
 
 for (let i = 0; i < anchors.length; i++) {
     anchors[i].addEventListener("click", function () {
-        setDetails(anchors[i])
-    });
+        setDetails(anchors[i]); 
+        showDetails();
+    }) 
 }
-
+ 
 function showDetails() {
     mainClass.classList.remove(HIDDEN);
     detailsContainer.classList.add(IS_POINT);
@@ -28,11 +28,13 @@ function showDetails() {
         detailsContainer.classList.remove(IS_POINT)
     }, 1);
     audio.play();
-    setTimeout(function () {
-        audio.pause()
+    setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
     }, 5000);
 }
 
 function hideDetails() {
     mainClass.classList.add(HIDDEN);
 }
+
