@@ -1,61 +1,52 @@
+//1.
+let strings = ["abc", "lmn", "cd", "abc", "abc"];
+function ulSurround(strings) {
+    let liStrings = strings.map(liElement);
+    liStrings.splice(0, 0, "<ul>");
+    liStrings.push("</ul>");
+    return liStrings;
+}
+function liElement(el) {
+    return "<li>" + el + "</li>";
+};
+console.log(ulSurround(strings));
 
-function checkTeudatZehut(teudatStrNumber) {
-    if (!validationTeudaIsString(teudatStrNumber)) {        // check the argument
-        return -1;
-    }
-    let arElemStr = Array.from(teudatStrNumber);            //get array of string elements
-    let sumDigits = sumElementsByAlgorithm(arElemStr);
-    return sumDigits % 10 == 0 ? true : false;
-}
-function ifElemTwoDig(el) {
-    return el % 10 + Math.trunc(el / 10);
-}
-function sumElementsByAlgorithm(ar) {
-    return ar.reduce(function (res, cur, i) {
-        if (i % 2 == 0) {
-            return res = res + (+cur);
-        }
-        cur *= 2;
-        return cur <= 9 ? res + cur : res + ifElemTwoDig(cur);
+//2.
+function count(strings, value) {
+    return strings.reduce(function (res, el) {
+        return el == value ? ++res : res;
     }, 0);
 }
+console.log(count(strings, 'abc'));
 
-function generateRandomTeudatZehut() {
-    let arRandom8Digits = [];
-    for (let i = 0; i < 8; i++) {
-        arRandom8Digits[i] = Math.round(Math.random() * 9);
+//3.
+function arrayCopy(src, srcPos, dst, dstPos, length) {
+    let srcCopy = getCopy(src);
+    let takeFromAr = fromSource(srcCopy, srcPos, length);
+    for (let i = takeFromAr.length - 1; i >= 0; i--) {
+        dst.splice(dstPos, 0, takeFromAr[i]);
     }
-    let sum8Rand = sumElementsByAlgorithm(arRandom8Digits);
-    let controlDigit = sum8Rand % 10 == 0 ? 0 : 10 - sum8Rand % 10;
-    arRandom8Digits[8] = controlDigit;   //add 9-th digit like a control digit to array
-    let teudatZehutStr = arToString(arRandom8Digits);
-    return teudatZehutStr;
+    return dst;
 }
-function arToString(ar) {
-    res = '';
-    ar.forEach(function (el) {
-        res = res + el;
-    })
-    return res;
+function getCopy(ar) {
+    return ar.slice();
 }
+function fromSource(ar, ind, howMany) {
+    return ar.splice(ind, howMany);
+}
+let arS = [1, 2, 3, 4, 5, 6, 7];
+let arD = [10, 20, 30, 40, 50, 60, 70];
+console.log(arS);  // see that arS is not updated
+console.log(arrayCopy(arS, 3, arD, 4, 3));
 
-function validationTeudaIsString(teudatStrNumber) {
-    if (typeof teudatStrNumber != 'string') {
-        console.log('ERROR! TZ should be a string')
-        return false;
-    }
-    for (let i = 0; i < Array.from(teudatStrNumber).length; i++) {
-        if (isNaN(Array.from(teudatStrNumber)[i])) {
-            console.log('ERROR! The TZ should be consist from digits only');
-            return false;
-        }
-    }
-    return true;
+//4.
+function move(array, index, offset) {
+    let arCopy = getCopy(array);
+    let numFromSource = fromSource(arCopy, index, 1)[0];
+    arCopy.splice(index + offset, 0, numFromSource);
+    return arCopy;
 }
 
-//TEST
-console.log("Random number of TZ is", generateRandomTeudatZehut());
-console.log(typeof generateRandomTeudatZehut());
-console.log(checkTeudatZehut(generateRandomTeudatZehut()));
-console.log(checkTeudatZehut('123e43212'));
-console.log(checkTeudatZehut(123456789));
+let numbers = [1, 2, 3, 4, 5, 6, 7];
+console.log(move(numbers, 3, -1));
+console.log(move(numbers, 2, 4));
