@@ -1,52 +1,36 @@
+
 //1.
-let strings = ["abc", "lmn", "cd", "abc", "abc"];
-function ulSurround(strings) {
-    let liStrings = strings.map(liElement);
-    liStrings.splice(0, 0, "<ul>");
-    liStrings.push("</ul>");
-    return liStrings;
+const numbers = [2, 17, -25, 38, 15];
+function minMax(numbers) {
+    const res = [];
+    res.push(numbers.reduce((acc, el) => acc < el ? acc : el));
+    res.push(numbers.reduce((acc, el) => acc > el ? acc : el));
+    return res;
 }
-function liElement(el) {
-    return "<li>" + el + "</li>";
-};
-console.log(ulSurround(strings));
+//TEST 1
+//note: the function returns an array despite that the console no show this fact
+console.log(`result of calling function minMax is array ${minMax(numbers)}`); 
 
 //2.
-function count(strings, value) {
-    return strings.reduce(function (res, el) {
-        return el == value ? ++res : res;
-    }, 0);
+function deleteWithPrefix(strings, prefix) {
+    // method 'slice' works for strings as well as for arrays
+    return strings.filter(n => n.slice(0, prefix.length) != prefix);
 }
-console.log(count(strings, 'abc'));
+//TEST 2
+const strings = ["abc", "old_abc", "lmn", "123", "old_lmn", "old_"];
+console.log(`array without elements with prefix: ${deleteWithPrefix(strings, "old_")}`);
 
 //3.
-function arrayCopy(src, srcPos, dst, dstPos, length) {
-    let srcCopy = getCopy(src);
-    let takeFromAr = fromSource(srcCopy, srcPos, length);
-    for (let i = takeFromAr.length - 1; i >= 0; i--) {
-        dst.splice(dstPos, 0, takeFromAr[i]);
-    }
-    return dst;
+function getSortedEvenOdd(numbers) {
+    let numbersCopy = numbers.slice();
+    numbersCopy.sort((a, b) => {
+        if (a % 2) {                     
+            return b % 2 ? b - a : 1;   // case if a is odd, b is odd  ? ..........
+        }
+        return b % 2 ? -1 : a - b;      // case if a is even, b is odd ? ..........
+    });
+    return numbersCopy;
 }
-function getCopy(ar) {
-    return ar.slice();
-}
-function fromSource(ar, ind, howMany) {
-    return ar.splice(ind, howMany);
-}
-let arS = [1, 2, 3, 4, 5, 6, 7];
-let arD = [10, 20, 30, 40, 50, 60, 70];
-console.log(arS);  // see that arS is not updated
-console.log(arrayCopy(arS, 3, arD, 4, 3));
-
-//4.
-function move(array, index, offset) {
-    let arCopy = getCopy(array);
-    let numFromSource = fromSource(arCopy, index, 1)[0];
-    arCopy.splice(index + offset, 0, numFromSource);
-    return arCopy;
-}
-
-let numbers = [1, 2, 3, 4, 5, 6, 7];
-console.log(move(numbers, 3, -1));
-console.log(move(numbers, 2, 4));
+//TEST 3
+ const numbers2 = [6, 3, 8, 5, 2, 7, 4,-19, 0];
+ console.log(`input arrays is ${numbers2} -> output arrays is ${getSortedEvenOdd(numbers2)}`);
