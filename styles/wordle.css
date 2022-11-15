@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.word-guess {
+    display: flex;
+    flex-direction: row;
+}
+.letter-guess {
+    font-size: 1.5em;
+    margin-left: 2vw;
+    /*background-color: gray;*/
+}
+.game-over {
+    font-size: 1.8em;
+    color: red;
+    margin-top: 10vh;
+}
+.game-win {
+    font-size: 1.8em;
+    color:green;
+    margin-top: 10vh;
+}
