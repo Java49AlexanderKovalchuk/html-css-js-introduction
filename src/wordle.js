@@ -7,15 +7,22 @@ const letterElements = document.querySelectorAll(".letter-guess");
 function onChange(event) {
 
     const wordGuess = event.target.value.toLowerCase();   // and getting the lowercase for all cases 
-    if (wordGuess.length != N_LETTERS) {
-        alert(`A word should contain ${N_LETTERS} letters`);
-    } else {
-        const wordAr = Array.from(wordGuess);
-        if (!validInputLetters(wordAr)) {
-            alert(`A word should contain letters only`)
+    const wordAr = Array.from(wordGuess);
+    event.target.value = '';
+    // if (wordGuess.length != N_LETTERS) {
+    //     alert(`A word should contain ${N_LETTERS} letters`);
+    // } 
+    N_ATTEMPTS = N_ATTEMPTS - 1;
+    if (!validationInputAndCount(wordGuess, wordAr)) {
+        if(N_ATTEMPTS > 0){
+        message.innerHTML = `You have ${N_ATTEMPTS} appempts`;
         }
-
-        N_ATTEMPTS = N_ATTEMPTS - 1;
+        else {//if(N_ATTEMPTS == 0) 
+            message.innerHTML = `Sorry - you guesses trials have ended up`;
+            message.classList.add("game-over");
+        }
+    }
+    else {
 
         if (N_ATTEMPTS > 0) {
             //according singular or plural
@@ -44,8 +51,21 @@ function onChange(event) {
     }
 }
 
+function validationInputAndCount(wordGuess, wordAr) {
+    //let count = N_ATTEMPTS;
+    if (wordGuess.length != N_LETTERS) {
+        alert(`A word should contain ${N_LETTERS} letters`);
+        return false;
+    }
+    else if (!validInputLetters(wordAr)) {
+        alert(`A word should contain letters only`)
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 function validInputLetters(arStr) {
     let res = arStr.filter(n => (n.charCodeAt() < "a".charCodeAt() || n.charCodeAt() > "z".charCodeAt()));
     return res.length ? false : true;
 }
-
