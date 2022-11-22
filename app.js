@@ -1,36 +1,38 @@
 
-//1.
-const numbers = [2, 17, -25, 38, 15];
-function minMax(numbers) {
-    const res = [];
-    res.push(numbers.reduce((acc, el) => acc < el ? acc : el));
-    res.push(numbers.reduce((acc, el) => acc > el ? acc : el));
-    return res;
+function isAnagram(str1, str2) {
+    str1 = str1.toLowerCase();
+    str2 = str2.toLowerCase();
+    if (str1.length != str2.length) {
+        return false;
+    }
+    const objStr1 = objOccurrences(str1);    // for example str1 -> { y: 1, e: 1, l: 2, o: 1, w: 1 }
+    const arStr2 = Array.from(str2);         
+    let res = 0;
+    for (let i = 0; i < arStr2.length; i++) {
+        res = --objStr1[arStr2[i]];
+        //console.log(res);
+    }
+    if (res != 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
-//TEST 1
-//note: the function returns an array despite that the console no show this fact
-console.log(`result of calling function minMax is array ${minMax(numbers)}`); 
 
-//2.
-function deleteWithPrefix(strings, prefix) {
-    // method 'slice' works for strings as well as for arrays
-    return strings.filter(n => n.slice(0, prefix.length) != prefix);
+function objOccurrences(str) {
+    const obj = {};
+    Array.from(str).forEach(el => obj[el] ? obj[el]++ : obj[el] = 1);
+    return obj;
 }
-//TEST 2
-const strings = ["abc", "old_abc", "lmn", "123", "old_lmn", "old_"];
-console.log(`array without elements with prefix: ${deleteWithPrefix(strings, "old_")}`);
+//TEST
+const word = 'yellow';
+console.log(isAnagram(word, 'weloly'));
+console.log(isAnagram(word, 'leloyw'));
+console.log(isAnagram(word, 'wolley'));
+console.log(isAnagram(word, 'weloyl'));
 
-//3.
-function getSortedEvenOdd(numbers) {
-    let numbersCopy = numbers.slice();
-    numbersCopy.sort((a, b) => {
-        if (a % 2) {                     
-            return b % 2 ? b - a : 1;   // case if a is odd, b is odd  ? ..........
-        }
-        return b % 2 ? -1 : a - b;      // case if a is even, b is odd ? ..........
-    });
-    return numbersCopy;
-}
-//TEST 3
- const numbers2 = [6, 3, 8, 5, 2, 7, 4,-19, 0];
- console.log(`input arrays is ${numbers2} -> output arrays is ${getSortedEvenOdd(numbers2)}`);
+console.log(isAnagram(word, 'weloll'));
+console.log(isAnagram(word, 'leloy'));
+console.log(isAnagram(word, 'wollet'));
+console.log(isAnagram(word, 'weloyo'));
