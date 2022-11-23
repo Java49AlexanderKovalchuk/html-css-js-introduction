@@ -13,15 +13,12 @@ function isAnagram(str1, str2) {
         if (objStr1[arStr2[i]] == undefined) {
             return false;
         }
-        objStr1[arStr2[i]] = objStr1[arStr2[i]] - 1;
+        //objStr1[arStr2[i]] = objStr1[arStr2[i]] - 1;
+        if(--objStr1[arStr2[i]] < 0) {
+            return false;
+        }
     } 
-    
-    let flag = false;
-    const arRes = Object.entries(objStr1);
-    if (flagTrue(arRes)) {
-        flag = true;
-    }
-    return flag;
+    return true;
 }
 
 function objOccurrences(str) {
@@ -29,12 +26,7 @@ function objOccurrences(str) {
     Array.from(str).forEach(el => obj[el] ? obj[el]++ : obj[el] = 1);
     return obj;
 }
-function flagTrue(ar) {
-    if(ar.filter(n => n[1] != 0).length) {       //if at least one element !=0 exist -> false
-        return false;
-    }
-    return true;
-}
+
 //TEST
 const word = 'yellow';
 console.log(isAnagram(word, 'weloly'));
