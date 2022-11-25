@@ -51,9 +51,6 @@ function getEmployeesBySalary(employees, salaryFrom, salaryTo) {
 function increaseSalary(employees, borderSalary, percent) { 
     const emplsLessBorder = employees.filter(n => n.salary < borderSalary);
     let res = emplsLessBorder.map(el => el.salary + el.salary * percent / 100); 
-    emplsLessBorder.forEach((n, i) => {n['salary'] = res[i];
-        return n;
-    });
     return emplsLessBorder;
 }
 
