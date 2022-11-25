@@ -51,6 +51,8 @@ function getEmployeesBySalary(employees, salaryFrom, salaryTo) {
 function increaseSalary(employees, borderSalary, percent) { 
     const emplsLessBorder = employees.filter(n => n.salary < borderSalary);
     let res = emplsLessBorder.map(el => el.salary + el.salary * percent / 100); 
+    emplsLessBorder.forEach((n, i) => n.salary = res[i]);         
+
     return emplsLessBorder;
 }
 
@@ -67,3 +69,5 @@ console.log("array of objects:", empls);
 console.log(`avarage age: ${getAverageAge(empls)} years`);
 console.log('sorted employee by salary:', getEmployeesBySalary(empls, 7000, 14000));
 console.log('increased salary: ', increaseSalary(empls, 10000, 10));
+
+console.log(empls);
