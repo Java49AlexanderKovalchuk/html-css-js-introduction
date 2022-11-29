@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles-movies.css">
+    <title>Movies</title>
+</head>
+
+<body>
+    <div class="menu-buttons">
+        <button onclick="show(0)">Show All Movies</button>
+        <button onclick="show(1)">Most Popular Movies</button>
+        <button onclick="show(2)">Least Popular Movies</button>
+    </div>
+    
+    <section hidden>
+        <ul class="movies-list">
+        </ul>
+    </section>
+
+    <section hidden>
+        <div class="movie-popMax"></div>
+    </section>
+
+    <section hidden>
+        <div class="movie-popMin"></div>
+    </section>
+
+    <script src="src/movies.js"></script>
+</body>
+
+</html>
