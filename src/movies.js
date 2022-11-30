@@ -8,59 +8,45 @@ const sectionElements = document.querySelectorAll("section");
 const moviePopMinElement = document.querySelector(".movie-popMin");
 const moviePopMaxElement = document.querySelector(".movie-popMax");
 
-ulElement.innerHTML = getPosterImages();
-function getPosterImages() {
+ulElement.innerHTML = getListMovies();
+moviePopMaxElement.innerHTML = getMovieElement(movieMaxPopularity(moviesData.results)); 
+moviePopMinElement.innerHTML = getMovieElement(movieMinPopularity(moviesData.results));
+
+function getListMovies() {
     const arImages = moviesData.results.map(movie => 
-        `<li classs="movie-item">
-            <div class="container-item">
+        `<li classs="movie-item">${getMovieElement(movie)}            
+        </li>`);
+    return arImages.join('');
+}
+
+
+function getMovieElement (movie) {
+    return `<div class="container-item">
                 <img class="movie-image" src="${httpPrefix}${movie.poster_path}">
                 <div class="movie-title-overview">
                     <div class="movie-title">${movie.original_title}</div>
                     <div class = "movie-overview">${movie.overview}</div>
-                </div>
-            </div>
-        </li>`);
-    return arImages.join('');
+                 </div>
+            </div>`
 }
+
 function show(index) {
     sectionElements.forEach(section => section.hidden = true);
     sectionElements[index].hidden = false;
-
-}
-function minMaxPop(objects) {
-    const res = objects.reduce((acc, el) => {
-        if(el.popularity < acc[0]) {
-            acc[0] = el.popularity;
-        }
-        if(el.popularity > acc[1]) {
-            acc[1] = el.popularity;
-        }
-        return acc;
-    }, [objects[0].popularity, objects[0].popularity]);
-    return res;
 }
 
-const maxPop = minMaxPop(moviesData.results)[1];
-const minPop = minMaxPop(moviesData.results)[0]; 
-
-const movieMostPop = moviesData.results.filter(n => n.popularity == maxPop)[0];
-const movieLeastPop = moviesData.results.filter(n => n.popularity == minPop)[0];
-
-moviePopMaxElement.innerHTML = getMostMovie(movieMostPop);
-moviePopMinElement.innerHTML = getMostMovie(movieLeastPop);
-
-function getMostMovie(movie) {
-    return `<div class="container-item">
-                    <img class="movie-image" src="${httpPrefix}${movie.poster_path}">
-                    <div class="movie-title-overview">
-                        <div class="movie-title">${movie.original_title}</div>
-                        <div class = "movie-overview">${movie.overview}</div>
-                    </div>
-                </div>`
+function movieMinPopularity(movies) {
+    return movies.reduce((acc, el) => el.popularity < acc.popularity ? el : acc);
+}
+function movieMaxPopularity(movies) {
+    return movies.reduce((acc, el) => el.popularity > acc.popularity ? el : acc);
 }
 
 
-    
 
 
+
+
+
+ 
 
