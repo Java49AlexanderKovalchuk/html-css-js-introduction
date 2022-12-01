@@ -5,31 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles-movies.css">
-    <title>Movies</title>
+    <title>Form</title>
+    <link rel="stylesheet" href="styles/form.css">
 </head>
 
 <body>
-    <div class="menu-buttons">
-        <button onclick="show(0)">Show All Movies</button>
-        <button onclick="show(1)">Most Popular Movies</button>
-        <button onclick="show(2)">Least Popular Movies</button>
-    </div>
-    
-    <section hidden>
-        <ul class="movies-list">
-        </ul>
-    </section>
 
-    <section hidden>
-        <div class="movie-popMax"></div>
-    </section>
+    <form id="employee-form" onsubmit="onSubmit(event)" class="form-class">
 
-    <section hidden>
-        <div class="movie-popMin"></div>
-    </section>
+        <div class="two-inputs">
+            <input type="text" name="employee_name" placeholder="Enter employee name" required>
+            <input type="email" name="email" placeholder="Enter email" required>
+        </div>
 
-    <script src="src/movies.js"></script>
+        <div class="date-label">
+            <label>Enter birthdate:</label>
+            <input type="date" name="birthDate" onchange="onChangeBirth(event)" required>
+        </div>
+
+        <div class="two-inputs">
+            <select name="department" required>
+                <option value hidden selected disabled>
+                    --Select Department--
+                </option>
+                <option value="QA">QA</option>
+                <option value="Development">Development</option>
+                <option value="Management">Management</option>
+                <option value="Audit">Audit</option>
+            </select>
+            <input type="number" name="salary" placeholder="Enter salary" onchange="onChange(event)" required>
+        </div>
+
+        <label class="message"></label>
+
+        <div class="buttons">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+
+    </form>
+    <script src="src/form.js"></script>
 </body>
 
 </html>
