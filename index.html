@@ -20,7 +20,7 @@
 
         <div class="date-label">
             <label>Enter birthdate:</label>
-            <input type="date" name="birthDate" onchange="onChangeBirth(event)" required>
+            <input type="date" name="birthDate" onchange="onChangeYear(event)" required>
         </div>
 
         <div class="two-inputs">
@@ -33,17 +33,18 @@
                 <option value="Management">Management</option>
                 <option value="Audit">Audit</option>
             </select>
-            <input type="number" name="salary" placeholder="Enter salary" onchange="onChange(event)" required>
+            <input type="number" name="salary" placeholder="Enter salary" onchange="onChangeSalary(event)" required>
         </div>
 
-        <label class="message"></label>
+       
 
         <div class="buttons">
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
         </div>
 
-    </form>
+    </form> 
+    <label class="message"></label>
     <script src="src/form.js"></script>
 </body>
 
