@@ -21,18 +21,15 @@ function onSubmit(event) {
     console.log(employee);
 }
 
-function onChangeSalary(event) {
-    if (event.target.name = "salary") {
+function onChange(event) {
+    if (event.target.name == "salary") {
         console.log('salary: ', event.target.value);
         if (+event.target.value < 1000 || +event.target.value > 40000) {
             event.target.value = '';
             outPutError(errSalary);
         }
     }
-}
-
-function onChangeYear(event) {
-    if (event.target.name = "birthDate") {
+    if (event.target.name == "birthDate") {
         let chosenYear = +event.target.value.slice(0, 4);
         console.log('birthYear: ', chosenYear);
         if (chosenYear < 1950 || chosenYear > currentYear) {
