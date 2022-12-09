@@ -3,7 +3,6 @@ export class Library {
         this.books = [];
     }
     addBook(book) {
-        //employee.salary = +employee.salary;
         book.pages = +book.pages;
         this.books.push(book);
     }

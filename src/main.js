@@ -2,7 +2,10 @@ import { Library } from "./data/library.js";
 const inputElements = document.querySelectorAll(".form-class [name]");
 const MIN_PAGES = 50;
 const MAX_PAGES = 2000;
+
+// get number of days from 1970 to given date for further comparasion 
 const BORDER_DAYS = Math.floor(new Date(1980, 0, 1).getTime() / 1000 / 60 / 60 / 24);
+
 const TIME_OUT_ERROR_MESSAGE = 5000;
 const ERROR_CLASS = "error";
 const ACTIVE = "active"
@@ -16,7 +19,8 @@ const booksAuthorListElement = document.getElementById("books-author");
 let author = document.querySelector(".author");
 const sectionsElement = document.querySelectorAll("section");
 const buttonsMenuElement = document.querySelectorAll(".buttons-menu *");
-/************************************************************************** */
+
+//**********************************************************
 
 const library = new Library();
 
@@ -55,9 +59,11 @@ function validatePublishingDate(element) {
     let year, month, day;
     [year, month, day] = arStrDate.map(n => +n);  // destructure array
     month -= 1;
+    
     let selectedNumberDays = Math.floor(new Date(year, month, day).getTime() / 1000 / 60 / 60 / 24);
-    if (selectedNumberDays < BORDER_DAYS) {
-        const message = "selected date shouldn't be early 01.01.1980";
+    let nowdDays = Math.floor(new Date().getTime() / 1000 / 60 / 60 / 24);
+    if (selectedNumberDays < BORDER_DAYS || selectedNumberDays > nowdDays) {
+        const message = "selected date shouldn't be early 01.01.1980 and later then tomorrow";
         showErrorMessage(element, message, dateErrorElement);
     }
 }
@@ -133,5 +139,3 @@ window.onChangePagesFrom = onChangePagesFrom;
 window.onChangePagesTo = onChangePagesTo;
 window.onSubmitAuthor = onSubmitAuthor;
 window.showSection = showSection;
-
-
