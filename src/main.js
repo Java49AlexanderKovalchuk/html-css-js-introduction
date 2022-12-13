@@ -24,7 +24,7 @@ const library = new Library();
 
 const bookForm = new BookForm({
     idForm: "book_form", idDateInput: "date_input", idPagesInput: "pages_input",
-    idDateError: "date_error", idPageError: "pages_error", minPages: MIN_PAGES, maxPages: MAX_PAGES,
+    idDateError: "date_error", idPagesError: "pages_error", minPages: MIN_PAGES, maxPages: MAX_PAGES,
     minTime: BORDER_DAYS
 });
 
