@@ -57,7 +57,7 @@ body {
 .books-item {
     max-width: 30vw;
     background-color: blue;
-    border-radius: 25%;
+    border-radius: 45px;
     text-align: center;
     border: 2px solid blue;
     margin-top: 10vh;
@@ -84,5 +84,5 @@ body {
 }
 
 #show-all-books {
-    
+
 }

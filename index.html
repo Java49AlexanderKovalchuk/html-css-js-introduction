@@ -20,7 +20,7 @@
         <header class="form-title">
             The Library form
         </header>
-        <form id="book_form" onsubmit="onSubmit(event)" class="form-class">
+        <form id="book_form" class="form-class">
             <div class="two-inputs">
                 <input type="text" name="book_title" required placeholder="Enter Book Title">
                 <input type="text" name="author" placeholder="Enter Author" required>
@@ -28,7 +28,7 @@
 
             <div class="date-label">
                 <label>Enter publishing date</label>
-                <input type="date" name="publishing_date" required onchange="onChange(event)">
+                <input type="date" name="publishing_date" required id="date_input">
             </div>
             <p id="date_error" class="error"></p>
 
@@ -43,7 +43,7 @@
                     <option value="Poetry">Poetry</option>
                     <option value="Plays">Plays</option>
                 </select>
-                <input type="number" name="pages" placeholder="Enter Pages" onchange="onChange(event)" required>
+                <input type="number" name="pages" placeholder="Enter Pages" required id="pages_input">
 
             </div>
             <p id="pages_error" class="error"></p>

@@ -1,17 +1,15 @@
 import { Library } from "./data/library.js";
-const inputElements = document.querySelectorAll(".form-class [name]");
+import { BookForm } from "./ui/BookForm.js";
+import { showErrorMessage } from "./ui/errorMessage.js";
+
 const MIN_PAGES = 50;
 const MAX_PAGES = 2000;
 
 // get number of days from 1970 to given date for further comparasion 
 const BORDER_DAYS = Math.floor(new Date(1980, 0, 1).getTime() / 1000 / 60 / 60 / 24);
 
-const TIME_OUT_ERROR_MESSAGE = 5000;
-const ERROR_CLASS = "error";
 const ACTIVE = "active"
 
-const dateErrorElement = document.getElementById("date_error");
-const pagesErrorElement = document.getElementById("pages_error");
 const pagesFormErrorElement = document.getElementById("pages_form_error");
 const booksListElement = document.getElementById("books-all");
 const booksPagesListElement = document.getElementById("books-pages");
@@ -24,59 +22,14 @@ const buttonsMenuElement = document.querySelectorAll(".buttons-menu *");
 
 const library = new Library();
 
-function onSubmit(event) {
-    event.preventDefault();
-    console.log("submitted");
-    const book = Array.from(inputElements).reduce(
-        (res, cur) => {
-            res[cur.name] = cur.value;
-            return res;
-        }, {}
-    )
-    console.log(book);
-    library.addBook(book);
-}
+const bookForm = new BookForm({
+    idForm: "book_form", idDateInput: "date_input", idPagesInput: "pages_input",
+    idDateError: "date_error", idPageError: "pages_error", minPages: MIN_PAGES, maxPages: MAX_PAGES,
+    minTime: BORDER_DAYS
+});
 
-function onChange(event) {
-    if (event.target.name == "pages") {
-        validatePages(event.target)
-    } 
-    else if (event.target.name == "publishing_date") {
-        validatePublishingDate(event.target);
-    }
-}
-function validatePages(element) {
-    const value = +element.value;
-    if (value < MIN_PAGES || value > MAX_PAGES) {
-        const message = value < MIN_PAGES ? `pages must be ${MIN_PAGES} or more`
-            : `pages must be ${MAX_PAGES} or less`;
-        showErrorMessage(element, message, pagesErrorElement);
-    }
-
-}
-function validatePublishingDate(element) {
-    const arStrDate = element.value.split('-');
-    let year, month, day;
-    [year, month, day] = arStrDate.map(n => +n);  // destructure array
-    month -= 1;
-    
-    let selectedNumberDays = Math.floor(new Date(year, month, day).getTime() / 1000 / 60 / 60 / 24);
-    let nowdDays = Math.floor(new Date().getTime() / 1000 / 60 / 60 / 24);
-    if (selectedNumberDays < BORDER_DAYS || selectedNumberDays > nowdDays) {
-        const message = "selected date shouldn't be early 01.01.1980 and later then tomorrow";
-        showErrorMessage(element, message, dateErrorElement);
-    }
-}
-function showErrorMessage(element, message, errorElement) {
-    element.classList.add(ERROR_CLASS);
-    errorElement.innerHTML = message;
-    setTimeout(() => {
-        element.classList.remove(ERROR_CLASS);
-        element.value = '';
-        errorElement.innerHTML = '';
-    }, TIME_OUT_ERROR_MESSAGE);
-}
-
+bookForm.addSubmitHandler((book) => library.addBook(book));
+//console.log('bookForm: ', bookForm);
 let pagesFrom = 0;
 let pagesTo = 0;
 function onSubmitPages(event) {
@@ -132,8 +85,6 @@ function getBookItems(books) {
           </li>`).join('');
 }
 
-window.onSubmit = onSubmit;
-window.onChange = onChange;
 window.onSubmitPages = onSubmitPages;
 window.onChangePagesFrom = onChangePagesFrom;
 window.onChangePagesTo = onChangePagesTo;
