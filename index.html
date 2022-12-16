@@ -62,9 +62,10 @@
     </section>
 
     <section id="show-books-author" hidden>
-        <form id="author-form" class="form-class" onsubmit="onSubmitAuthor(event)">
+        <form id="author-form" class="form-class">
             <div class="two-inputs">
-                <input class='author' type="text" name="authorName" placeholder="Enter author's name" required>
+                <input class='author' type="text" id="authorName" name="authorName" placeholder="Enter author's name"
+                    required>
                 <button type="submit">Search</button>
             </div>
         </form>
@@ -74,12 +75,10 @@
     </section>
 
     <section id="show-books-pages" hidden>
-        <form id="pages-form" class="form-class" onsubmit="onSubmitPages(event)">
+        <form id="pages-form" class="form-class">
             <div class="two-inputs">
-                <input type="number" name="pagesFrom" placeholder="Enter pages 'From'"
-                    onchange="onChangePagesFrom(event)" required>
-                <input type="number" name="pagesTo" placeholder="Enter pages 'To'" onchange="onChangePagesTo(event)"
-                    required>
+                <input type="number" id="pagesFrom" " name=" pagesFrom" placeholder="Enter pages 'From'" required>
+                <input type="number" id="pagesTo" name="pagesTo" placeholder="Enter pages 'To'" required>
             </div>
             <div class="buttons">
                 <button type="submit">Search</button>
@@ -91,8 +90,6 @@
 
         </ul>
     </section>
-
-
 
     <script src="src/main.js" type="module"></script>
 </body>

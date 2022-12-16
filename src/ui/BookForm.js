@@ -8,8 +8,8 @@ export class BookForm {
     #pagesErrorElement;
     #minPages;
     #maxPages;
-    #minTime;
-    #maxTime;
+    #minDate;
+    #maxDate;
 
     constructor(params) {
         this.#formElement = document.getElementById(params.idForm);
@@ -20,8 +20,8 @@ export class BookForm {
         this.#pagesErrorElement = document.getElementById(params.idPagesError);
         this.#minPages = params.minPages;
         this.#maxPages = params.maxPages;
-        this.#minTime = params.minTime;
-        this.#maxTime = getMaxTime();
+        this.#minDate = params.minDate;
+        this.#maxDate = getMaxDate();
         this.onClose();
 
     }
@@ -50,12 +50,8 @@ export class BookForm {
     }
 
     validatePublishingDate(element) {
-        const arStrDate = element.value.split('-');
-        let year, month, day;
-        [year, month, day] = arStrDate.map(n => +n);  // destructure array
-        month -= 1;
-        let selectedNumberDays = Math.floor(new Date(year, month, day).getTime() / 1000 / 60 / 60 / 24);
-        if (selectedNumberDays < this.#minTime || selectedNumberDays > this.#maxTime) {
+        const selectedDate = new Date(element.value);
+        if (selectedDate < this.#minDate || selectedDate > this.#maxDate) {
             const message = "selected date shouldn't be early 01.01.1980 and later then tomorrow";
             showErrorMessage(element, message, this.#dateErrorElement);
         }
@@ -71,6 +67,6 @@ export class BookForm {
     }
 }
 
-function getMaxTime() {
-    return Math.floor(new Date().getTime() / 1000 / 60 / 60 / 24);
+function getMaxDate() {
+    return new Date();
 }
