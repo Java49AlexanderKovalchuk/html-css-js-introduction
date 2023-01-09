@@ -1,74 +1,44 @@
 "use strict";
-// HW#30
-const NUMB_LETTERS = 26;
+const aCodeAscii = 'a'.charCodeAt(0);
+const zCodeAscii = 'z'.charCodeAt(0);
+const nEnglishLetters = zCodeAscii - aCodeAscii + 1;
 function shiftCipher(str, shift = 1) {
-    const arString = Array.from(str);
-    let correction;
-    let letter;
-    let asciiFromZero;
-    correction = 'a'.charCodeAt(0);
-    const arStringAfter = arString.map(el => {
-        asciiFromZero = el.charCodeAt(0) - correction;
-        if (asciiFromZero >= 0 && asciiFromZero <= 25) {
-            asciiFromZero = getIndexShiftRight(asciiFromZero, shift) + correction;
-            letter = String.fromCharCode(asciiFromZero);
-        }
-        else {
-            asciiFromZero = asciiFromZero + correction;
-            letter = String.fromCharCode(asciiFromZero);
-        }
-        return letter;
-    });
-    return arStringAfter.join('');
-}
-function getIndexShiftRight(ind, shift) {
-    shift = shift % NUMB_LETTERS;
-    let indRev = NUMB_LETTERS - 1 - ind;
-    let ind2;
-    if (shift > indRev) {
-        ind2 = shift - indRev - 1;
-    }
-    else {
-        ind2 = shift + ind;
-    }
-    return ind2;
-}
-function getIndexShiftLeft(ind, shift) {
-    shift = shift % NUMB_LETTERS;
-    let ind2;
-    if (shift > ind) {
-        ind2 = NUMB_LETTERS - (shift - ind);
-    }
-    else {
-        ind2 = ind - shift;
-    }
-    return ind2;
+    return cipherDecipher(str, shift, mapperCipher);
 }
 function shiftDecipher(str, shift = 1) {
-    const arString = Array.from(str);
-    let correction;
-    let letter;
-    let asciiFromZero;
-    correction = 'a'.charCodeAt(0);
-    const arStringAfter = arString.map(el => {
-        asciiFromZero = el.charCodeAt(0) - correction;
-        if (asciiFromZero >= 0 && asciiFromZero <= 25) {
-            asciiFromZero = getIndexShiftLeft(asciiFromZero, shift) + correction;
-            letter = String.fromCharCode(asciiFromZero);
-        }
-        else {
-            asciiFromZero = asciiFromZero + correction;
-            letter = String.fromCharCode(asciiFromZero);
-        }
-        return letter;
-    });
-    return arStringAfter.join('');
+    return cipherDecipher(str, shift, mapperDecipher);
 }
-console.log('-------TEST 1--------');
-console.log('cipher 1:', shiftCipher('abzA', 1000));
-console.log('cipher 2:', shiftCipher('abz.', 1000));
-console.log('cipher 3:', shiftCipher('abz&', 27));
-console.log('-------TEST 2--------');
-console.log('decipher 1:', shiftDecipher('bca', 27));
-console.log('decipher 2:', shiftDecipher('mnl', 1000));
+function cipherDecipher(str, shift, mapperFun) {
+    //const arStr: string[] = Array.from(str);
+    const arStr = Array.from(str);
+    const arRes = arStr.map(symb => {
+        let res = symb;
+        if (symb <= 'z' && symb >= 'a') {
+            res = mapperFun(symb, shift);
+        }
+        return res;
+    });
+    return arRes.join('');
+}
+function mapperCipher(symb, shift) {
+    const actualShift = (symb.charCodeAt(0) - aCodeAscii + shift) % nEnglishLetters;
+    return String.fromCharCode(aCodeAscii + actualShift);
+}
+function mapperDecipher(symb, shift) {
+    const actualShift = (zCodeAscii - symb.charCodeAt(0) + shift) % nEnglishLetters;
+    return String.fromCharCode(zCodeAscii - actualShift);
+}
+function testCipherDecipher(data, testName) {
+    console.log(`${"*".repeat(10)}${testName}${"*".repeat(10)}`);
+    const funForTest = testName === "cipherTest" ? shiftCipher : shiftDecipher;
+    data.forEach((obj => console.log(`str = ${obj.str}, shift = ${obj.shift || 1} => ${funForTest(obj.str, obj.shift)}`)));
+}
+const dataForCipherTest = [
+    { str: "abc" }, { str: "abz", shift: 1000 }
+];
+testCipherDecipher(dataForCipherTest, "cipherTest");
+const dataForDecipherTest = [
+    { str: "bcd" }, { str: "mnl", shift: 1000 }
+];
+testCipherDecipher(dataForDecipherTest, "decipherTest");
 //# sourceMappingURL=app.js.map
