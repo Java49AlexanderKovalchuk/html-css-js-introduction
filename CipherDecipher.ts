@@ -1,7 +1,10 @@
 export class CipherDecipher {
-
+    
+    private amountSymbols: number;
+    
     constructor(private leastAsciiCode: number, private mostAsciiCode: number,
-        private amountSymbols: number, private shift: number) {
+        private shift: number) {
+        this.amountSymbols = this.mostAsciiCode - this.leastAsciiCode + 1;
     }
 
     cipher(str: string): string {

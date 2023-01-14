@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CipherDecipher = void 0;
 class CipherDecipher {
-    constructor(leastAsciiCode, mostAsciiCode, amountSymbols, shift) {
+    constructor(leastAsciiCode, mostAsciiCode, shift) {
         this.leastAsciiCode = leastAsciiCode;
         this.mostAsciiCode = mostAsciiCode;
-        this.amountSymbols = amountSymbols;
         this.shift = shift;
+        this.amountSymbols = this.mostAsciiCode - this.leastAsciiCode + 1;
     }
     cipher(str) {
         const arStr = str.split('');
